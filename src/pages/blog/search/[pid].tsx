@@ -36,7 +36,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>{pid} - Wayne Blogs</title>
+        <title>Searched {pid} - Wayne Blogs</title>
       </Head>
       <Navbar />
       <main>
