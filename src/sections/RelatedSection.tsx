@@ -23,7 +23,6 @@ const RelatedSection = ({ tags }: Props) => {
 
         axios.get('/api/queries?action=getcategories&target=null')
             .then((res) => {
-                console.log(res.data.plaindata);
                 setCategoryButtons(res.data.plaindata);
             })
             .catch(err => console.log);
