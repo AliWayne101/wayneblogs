@@ -11,11 +11,28 @@ import {
 import { IBlog } from '@/schema/blogSchema';
 import RelatedSection from './RelatedSection';
 import Loading from '@/components/Loading';
+import { GrLike, GrDislike } from 'react-icons/gr';
 
 const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
 
     const [webAddr, setWebAddr] = useState('');
     const [primedTags, setPrimedTags] = useState('');
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+
+    const likePost = () => {
+        setLikes(likes + 1);
+        updatePost('like');
+    }
+    
+    const dislikePost = () => {
+        setDislikes(dislikes + 1);
+        updatePost('like');
+    }
+
+    const updatePost = (action: string) => {
+        axios.get(`/api/queries/?action=${action}&target=${blogInfo._id}`);
+    }
 
     useEffect(() => {
         axios.get('/api/getAddr')
@@ -30,6 +47,9 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
             tagsurl += sep + data;
         });
         setPrimedTags(tagsurl);
+        setLikes(blogInfo.likes);
+        setDislikes(blogInfo.dislikes);
+
     }, [blogInfo]);
 
     return (
@@ -38,6 +58,9 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
                 <div className="detailed-blog-userbox-left">
                     <span className='detailed-blog-userbox-left-author'>{blogInfo.author}</span>
                     <span className='detailed-blog-userbox-left-tstamp'>{new Date(blogInfo.tstamp).toString()}</span>
+                    <span className='detailed-blog-userbox-left-buttons'>
+                        {likes} <span className='clickable'><GrLike size={12} onClick={likePost} /></span> {dislikes} <span className='clickable'><GrDislike size={12} onClick={dislikePost} /></span>
+                    </span>
                 </div>
                 <div className="detailed-blog-userbox-right">
                     {

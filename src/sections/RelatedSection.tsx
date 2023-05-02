@@ -16,7 +16,6 @@ const RelatedSection = ({ tags }: Props) => {
         const relatedLink = `/api/queries?action=relatedtopics&target=${tags}`;
         axios.get(relatedLink)
             .then((res) => {
-                console.log(res.data.data);
                 SetrelatedBlogs(res.data.data);
             })
             .catch(err => console.log(err));

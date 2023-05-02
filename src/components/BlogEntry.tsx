@@ -2,13 +2,16 @@ import React from 'react';
 import Button from './Button';
 import Image from 'next/image';
 import { IBlog } from '@/schema/blogSchema';
+import Link from 'next/link';
 
 const BlogEntry = ({ bEntry }: { bEntry: IBlog }) => {
     return (
         <div className="blog">
             <div className="blog-text">
                 <div className="blog-text-uploaded"><span>{bEntry.author}</span> in <span>{bEntry.category}</span></div>
-                <div className="blog-text-title">{bEntry.title}</div>
+                <div className="blog-text-title">
+                    <Link href={`/blog/${bEntry.titleurl}`} className='link'>{bEntry.title}</Link>
+                </div>
                 <div className="blog-text-short-desc">{bEntry.desc}</div>
                 <div className="blog-text-button">
                     <Button text="Read more.." link={`/blog/${bEntry.titleurl}`} />

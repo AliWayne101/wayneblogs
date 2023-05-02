@@ -10,7 +10,9 @@ export interface IBlog extends Document {
     desc: string,
     tags: [string],
     category: string,
-    img: string
+    img: string,
+    likes: number,
+    dislikes: number,
 }
 
 const blogSchema = new mongoose.Schema({
@@ -29,6 +31,8 @@ const blogSchema = new mongoose.Schema({
     },
     category: String,
     img: String,
+    likes: Number,
+    dislikes: Number
 });
 
 let BlogModel: mongoose.Model<IBlog>;

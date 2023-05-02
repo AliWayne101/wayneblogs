@@ -173,6 +173,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
             res.status(500).json(results);
           })
+        } else if (action === "like") {
+          const update = await BlogSchema.findOneAndUpdate({
+            _id: target
+          }, {
+            $inc: { likes: 1}
+          });
+        } else if (action === "dislike") {
+          const update = await BlogSchema.findOneAndUpdate({
+            _id: target
+          }, {
+            $inc: { likes: 1}
+          });
         }
         // end of statement
       }

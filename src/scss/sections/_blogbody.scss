@@ -15,6 +15,13 @@
             &-tstamp {
                 padding: 5px 20px;
                 font-size: var(--tsm);
+                display: block;
+            }
+            &-buttons {
+                display: block;
+                padding: 5px 20px;
+                font-size: var(--tsm);
+                color: var(--light-slate);
             }
         }
     }
