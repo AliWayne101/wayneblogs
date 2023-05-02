@@ -3,9 +3,9 @@ import React from 'react'
 
 const Footer = () => {
     const footLinks = [
-        { name: 'About', link: '/pages/about' },
-        { name: 'Privacy', link: '/pages/privacy' },
-        { name: 'Terms', link: '/pages/terms' },
+        { name: 'About', link: '/about' },
+        { name: 'Privacy', link: '/privacy' },
+        { name: 'Terms', link: '/terms' },
     ];
 
     return (
