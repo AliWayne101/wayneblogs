@@ -9,7 +9,7 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
-        <MainBody infiniteData={false}/>
+        <MainBody infiniteData={false} primedDocs={null}/>
       </main>
     </>
   )

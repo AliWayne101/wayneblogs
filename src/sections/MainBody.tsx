@@ -8,7 +8,12 @@ import Error from '@/components/Error'
 import Loading from '@/components/Loading'
 import RightBox from '@/components/RightBox'
 
-const MainBody = ({ infiniteData }: { infiniteData: Boolean }) => {
+interface Props {
+    infiniteData: Boolean,
+    primedDocs: IBlog[] | null
+}
+
+const MainBody = ({ infiniteData, primedDocs }: Props) => {
 
     const [docs, setdocs] = useState<IBlog[]>([]);
     const [gotResult, setGotResult] = useState(false);
@@ -18,26 +23,29 @@ const MainBody = ({ infiniteData }: { infiniteData: Boolean }) => {
     const target = infiniteData ? "all" : "some";
 
     useEffect(() => {
-        console.log('initiated');
-        const reqAddr = `/api/queries?action=showBlogs&target=${target}`;
-        console.log(reqAddr);
-        axios.get(reqAddr)
-            .then((res) => {
-                setGotResult(true);
-                setdocs(res.data.data);
-            })
-            .catch((err) => {
-                console.log('Got Error');
-                setGotError(true);
-            });
-        
-            
+
+        if (primedDocs === null) {
+            const reqAddr = `/api/queries?action=showBlogs&target=${target}`;
+            axios.get(reqAddr)
+                .then((res) => {
+                    setGotResult(true);
+                    setdocs(res.data.data);
+                })
+                .catch((err) => {
+                    console.log('Got Error');
+                    setGotError(true);
+                });
+        } else {
+            setGotResult(true);
+            setdocs(primedDocs);
+        }
+
         axios.get('/api/queries?action=getcategories&target=null')
-        .then((res) => {
-            setCategoryButtons(res.data.plaindata);
-        })
-        .catch(err => console.log);
-        
+            .then((res) => {
+                setCategoryButtons(res.data.plaindata);
+            })
+            .catch(err => console.log);
+
     }, [target]);
 
     return (

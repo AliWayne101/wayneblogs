@@ -118,6 +118,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             
             res.status(500).json(results);
           })
+        } else if (action === "category") {
+          BlogSchema.find({ category: target })
+          .sort({ tstamp: -1 })
+          .exec()
+          .then((docs) => {
+            results = {
+              data: docs
+            }
+            res.status(200).json(results);
+          })
+          .catch((err) => {
+            results = {
+              error: err,
+            }
+            
+            res.status(500).json(results);
+          })
         }
         // end of statement
       }

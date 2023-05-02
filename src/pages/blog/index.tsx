@@ -21,7 +21,7 @@ const Index = () => {
             <main>
                 <Hero />
                 <Search />
-                <MainBody infiniteData={true} />
+                <MainBody infiniteData={true} primedDocs={null}/>
             </main>
         </>
     )
