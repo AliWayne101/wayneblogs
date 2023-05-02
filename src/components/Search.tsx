@@ -10,7 +10,9 @@ const Search = () => {
     
     const _keyDown = (e: string) => {
         if (e === "Enter") {
-            router.push(`/blog/search/${searchValue}`);
+            if (searchValue.length > 0) {
+                router.push(`/blog/search/${searchValue}`);
+            }
         }
     }
 

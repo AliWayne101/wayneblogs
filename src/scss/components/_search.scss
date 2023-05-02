@@ -26,4 +26,10 @@
             font-size: var(--tlarge2);
         }
     }
+
+    @media screen and (max-width: 960px) {
+        &-button {
+            margin-right: 10px;
+        }
+    }
 }
