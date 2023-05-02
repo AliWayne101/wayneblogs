@@ -37,7 +37,6 @@ const Blog = () => {
       </Head>
       <Navbar />
       <main>
-        <Search />
         {
           isError ? (
             <Error text="There was a problem fetching the document, please refresh the page" />

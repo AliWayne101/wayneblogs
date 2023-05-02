@@ -41,7 +41,6 @@ const Category = () => {
             <Navbar />
             <main>
                 <Hero />
-                <Search />
                 {
                     GotResult ? (
                         Docs.length > 0 ? (

@@ -20,7 +20,6 @@ const Index = () => {
             <Navbar />
             <main>
                 <Hero />
-                <Search />
                 <MainBody infiniteData={true} primedDocs={null}/>
             </main>
         </>

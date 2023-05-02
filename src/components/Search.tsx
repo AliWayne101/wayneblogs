@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 
@@ -11,7 +11,10 @@ const Search = () => {
     const _keyDown = (e: string) => {
         if (e === "Enter") {
             if (searchValue.length > 0) {
-                router.push(`/blog/search/${searchValue}`);
+                const urlfriendly = encodeURIComponent(searchValue);
+                console.log(searchValue);
+                console.log(urlfriendly);
+                router.push(`/blog/search/${urlfriendly}`);
             }
         }
     }
@@ -22,7 +25,7 @@ const Search = () => {
             <input type="text" name="search" id="search" placeholder='Search any topic..' onKeyDown={(e) => _keyDown(e.key)} onChange={(e) => setSearchValue(e.currentTarget.value)} />
         </div>
         <div className="search-button">
-            <Link href={`/blog/search/${searchValue}`}>
+            <Link href={`/blog/search/${encodeURIComponent(searchValue)}`}>
                 <HiMagnifyingGlass />
             </Link>
         </div>

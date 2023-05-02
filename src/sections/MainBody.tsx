@@ -7,6 +7,7 @@ import { IBlog } from '@/schema/blogSchema'
 import Error from '@/components/Error'
 import Loading from '@/components/Loading'
 import RightBox from '@/components/RightBox'
+import Search from '@/components/Search'
 
 interface Props {
     infiniteData: Boolean,
@@ -70,6 +71,7 @@ const MainBody = ({ infiniteData, primedDocs }: Props) => {
                 }
             </div>
             <div className="body-container-right">
+                <Search />
                 {categoryButtons.length > 0 && (
                     <RightBox title='Discover More' buttons={categoryButtons} />
                 )}
