@@ -1,0 +1,105 @@
+.body-container {
+  margin-top: 10rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  &-left {
+    margin: 0 2rem;
+    .blog {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--slate);
+      min-height: 200px;
+      display: grid;
+      grid-template-columns: 70% 30%;
+      border-radius: 15px;
+      &-text {
+        color: var(--slate);
+        &-uploaded {
+          font-family: var(--raleway);
+          span {
+            font-weight: bold;
+            color: var(--light-slate);
+          }
+          margin: 4px 10px;
+        }
+        &-title {
+          padding: 5px;
+          font-family: var(--raleway);
+          font-weight: bold;
+          color: var(--theme-color);
+          font-size: var(--tlarge2);
+        }
+        &-short-desc {
+          font-family: var(--fira-code);
+          font-size: var(--tsm);
+          padding: 4px 5px;
+          height: 80px;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        &-button {
+          display: flex;
+          justify-content: right;
+          margin-right: 10px;
+        }
+        &-info {
+          padding: 5px 30px;
+          font-family: var(--fira-code);
+          span {
+            margin-right: 40px;
+          }
+        }
+      }
+      &-image {
+        position: relative;
+        object-fit: cover;
+        max-height: 210px;
+        height: auto;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+        margin-top: 20px;
+        img {
+          border-top-left-radius: 15px;
+          border-bottom-left-radius: 15px;
+        }
+      }
+    }
+  }
+  &-right {
+    &-top {
+      margin: 1rem 1rem;
+      span {
+        color: var(--light-slate);
+        font-family: var(--fira-code);
+      }
+      &-buttons {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+    .blog {
+        grid-template-columns: 1fr;
+        &-text {
+            &-info {
+                font-size: 12px;
+                margin-top: 10px;
+                span {
+                    margin-right: 15px;
+                }
+            }
+        }
+        &-image {
+            display: none;
+        }
+    } 
+  }
+}

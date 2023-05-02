@@ -1,0 +1,23 @@
+.useful-link {
+    border-top: 1px solid var(--slate);
+    margin-top: 2rem;
+    padding: 3rem 3rem;
+    &-items {
+        justify-content: center;
+        display: flex;
+        gap: 2rem;
+        &-item {
+            list-style-type: none;
+            font-family: var(--fira-code);
+            font-size: var(--tlarge);
+        }
+    }
+}
+
+.copyrights {
+    margin: 2rem auto;
+    width: 100%;
+    text-align: center;
+    color: var(--light-slate);
+    font-family: var(--raleway);
+}

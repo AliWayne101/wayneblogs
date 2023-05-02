@@ -1,0 +1,24 @@
+.hero {
+    border-bottom: 1px solid var(--slate);
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: center;
+    min-height: 60vh;
+    &-title {
+        font-size: var(--tgiant);
+        font-family: var(--raleway);
+        color: var(--light-slate);
+    }
+    &-text {
+        color: var(--slate);
+        font-family: var(--fira-code);
+        font-size: var(--tlarge);
+    }
+    &-button {
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+}

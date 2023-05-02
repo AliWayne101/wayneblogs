@@ -1,0 +1,10 @@
+.related-blogs {
+  margin-top: 15rem;
+  border-top: 1px solid var(--slate);
+  padding-top: 5rem;
+  &-title {
+    font-size: var(--tgiant);
+    font-family: var(--raleway);
+    color: var(--secondary-color);
+  }
+}

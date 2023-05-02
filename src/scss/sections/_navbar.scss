@@ -1,0 +1,113 @@
+nav {
+  min-height: 60px;
+  .wrapper {
+    padding: 0 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    .brand {
+      display: flex;
+      &-text {
+        font-family: var(--raleway);
+        font-size: var(--tx2large);
+        margin: auto;
+        height: inherit;
+        a {
+          color: var(--theme-color);
+          text-decoration: none;
+          padding-top: 5px;
+        }
+      }
+      a {
+        display: flex;
+        height: 3rem;
+        width: 3rem;
+        margin: 2rem 0;
+        fill: none;
+        color: (--theme-color);
+      }
+    }
+
+    .nav-responsive-toggle {
+      cursor: pointer;
+      display: none;
+      color: var(--theme-color);
+      font-size: var(--tlarge2);
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s ease-in-out;
+      z-index: 15;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 3rem;
+      color: var(--lightest-slate);
+      font-size: var(--tsm1);
+      &-list {
+        display: flex;
+        gap: 3rem;
+        list-style-type: none;
+        font-family: var(--fira-code);
+        &-item {
+          a {
+            color: inherit;
+            text-decoration: none;
+            padding: 10px;
+            transition: 0.3s ease-in-out;
+          }
+          &:hover {
+            color: var(--theme-color);
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 1020px) {
+      padding: 0 2rem;
+      .nav-responsive-toggle {
+        display: flex;
+        z-index: 15;
+      }
+
+      .nav-items {
+        position: fixed;
+        height: 100vh;
+        right: 0;
+        width: 0%;
+        opacity: 0;
+        visibility: hidden;
+        top: 0;
+        padding: 50px 10px;
+        background-color: var(--light-navy);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease-in-out;
+        z-index: 11;
+        &-list {
+          flex-direction: column;
+        }
+      }
+
+      .nav-responsive {
+        width: min(75vw, 400px);
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  .blur-nav {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    transition: 0.3s ease-in-out;
+    z-index: 20;
+    background-color: rgba(10, 25, 47, 0.85);
+    box-shadow: 0 10px 30px -10px var(--navy-shadow);
+    backdrop-filter: blur(10px);
+  }
+}

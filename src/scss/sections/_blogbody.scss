@@ -1,0 +1,40 @@
+.detailed-blog {
+    margin-top: 15rem;
+    &-userbox {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        &-left {
+            font-family: var(--fira-code);
+            color: var(--slate);
+            &-author {
+                padding: 5px 10px;
+                border: 2px solid var(--secondary-color);
+                display: block;
+            }
+            &-tstamp {
+                padding: 5px 20px;
+                font-size: var(--tsm);
+            }
+        }
+    }
+    &-body {
+        margin-top: 5rem;
+        font-family: var(--fira-code);
+        color: var(--light-slate);
+        &-title {
+            font-size: var(--txlarge);
+            color: var(--theme-color);
+            margin-bottom: 20px;
+        }
+    }
+    @media screen and (max-width: 960px) {
+        &-userbox {
+            display: block;
+            &-right {
+                margin-top: 20px;
+                text-align: right;
+            }
+        }
+    }
+}

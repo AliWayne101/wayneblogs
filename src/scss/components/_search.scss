@@ -1,0 +1,29 @@
+.search {
+    margin-top: 10rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    border: 1px solid var(--theme-color);
+    border-radius: 15px;
+    &-box {
+        width: 97%;
+        input {
+            background-color: transparent;
+            outline: none;
+            border: none;
+            height: 30px;
+            padding: 5px 10px;
+            font-size: var(--tbase);
+            width: 100%;
+            color: var(--light-slate);
+        }
+    }
+    &-button {
+        display: flex;
+        margin-top: 5px;
+        a {
+            color: var(--theme-color);
+            font-size: var(--tlarge2);
+        }
+    }
+}

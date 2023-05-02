@@ -1,0 +1,11 @@
+.loading-box {
+    text-align: center;
+    margin: 5rem auto;
+    span {
+        display: block;
+        font-size: var(--txlarge);
+        padding-top: 10px;
+        font-family: var(--fira-code);
+        color: var(--slate);
+    }
+}

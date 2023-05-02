@@ -1,0 +1,16 @@
+
+.err-box {
+  margin-top: 5rem;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    span {
+      display: block;
+      margin-top: 10px;
+      font-size: var(--tbase);
+      color: var(--slate);
+      font-family: var(--fira-code);
+    }
+  }
+  
