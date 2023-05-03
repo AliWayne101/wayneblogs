@@ -9,12 +9,14 @@ import Navbar from '@/sections/Navbar';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const Category = () => {
 
-    const _router = useRouter();
+    const _router= useRouter();
     const { pid } = _router.query;
+
+    const mainRef = useRef<HTMLElement>(null);
 
     const [GotResult, setGotResult] = useState(false);
     const [Docs, setDocs] = useState<IBlog[]>([]);
@@ -31,6 +33,12 @@ const Category = () => {
                     console.log('Got Error');
                     setGotError(true);
                 });
+
+        if (mainRef.current) {
+            console.log('focusing');
+            mainRef.current.focus();
+            mainRef.current.scrollIntoView({ behavior: 'smooth'});
+        }
     }, [pid]);
 
     return (
@@ -39,8 +47,7 @@ const Category = () => {
                 <title>{ pid } - Wayne Blogs</title>
             </Head>
             <Navbar />
-            <main>
-                <Hero />
+            <main ref={mainRef}>
                 {
                     GotResult ? (
                         Docs.length > 0 ? (

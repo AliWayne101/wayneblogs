@@ -19,7 +19,6 @@ const Index = () => {
             </Head>
             <Navbar />
             <main>
-                <Hero />
                 <MainBody infiniteData={true} primedDocs={null}/>
             </main>
         </>

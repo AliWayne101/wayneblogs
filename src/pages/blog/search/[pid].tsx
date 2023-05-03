@@ -40,7 +40,6 @@ const Index = () => {
       </Head>
       <Navbar />
       <main>
-        <Hero />
         {
           GotResult ? (
             Docs.length > 0 ? (
