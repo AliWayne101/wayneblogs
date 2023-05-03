@@ -1,9 +1,7 @@
 import Error from '@/components/Error';
 import Loading from '@/components/Loading';
-import Search from '@/components/Search';
 import { IBlog } from '@/schema/blogSchema';
 import Footer from '@/sections/Footer';
-import Hero from '@/sections/Hero';
 import MainBody from '@/sections/MainBody';
 import Navbar from '@/sections/Navbar';
 import axios from 'axios';
@@ -13,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 const Category = () => {
 
-    const _router= useRouter();
+    const _router = useRouter();
     const { pid } = _router.query;
 
     const mainRef = useRef<HTMLElement>(null);
@@ -24,27 +22,27 @@ const Category = () => {
 
     useEffect(() => {
         const reqAddr = `/api/queries?action=category&target=${pid}`;
-            axios.get(reqAddr)
-                .then((res) => {
-                    setGotResult(true);
-                    setDocs(res.data.data);
-                })
-                .catch((err) => {
-                    console.log('Got Error');
-                    setGotError(true);
-                });
+        axios.get(reqAddr)
+            .then((res) => {
+                setGotResult(true);
+                setDocs(res.data.data);
+            })
+            .catch((err) => {
+                console.log('Got Error');
+                setGotError(true);
+            });
 
+        console.log('PID changed');
         if (mainRef.current) {
-            console.log('focusing');
             mainRef.current.focus();
-            mainRef.current.scrollIntoView({ behavior: 'smooth'});
+            mainRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [pid]);
 
     return (
         <>
             <Head>
-                <title>{ pid } - Wayne Blogs</title>
+                <title>{pid} - Wayne Blogs</title>
             </Head>
             <Navbar />
             <main ref={mainRef}>
@@ -62,7 +60,7 @@ const Category = () => {
                         GotError ? (
                             <Error text='Seem we are facing some technical issues, kindly refresh the page' />
                         ) : (
-                            <Loading  />
+                            <Loading />
                         )
                     )
                 }

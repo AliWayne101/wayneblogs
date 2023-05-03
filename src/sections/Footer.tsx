@@ -22,6 +22,7 @@ const Footer = () => {
             </ul>
         </div>
         <div className="copyrights">
+            Code and Design: <Link href='https://facebook.com/AlexAmeenWains' className='link' target='_blank'>Ali Wains</Link><br />
             Copyright © 2023 <Link href='https://waynedev.vercel.app' className='link' target='_blank'>Wayne Development</Link>.<br />All rights reserved.
         </div>
         </>

@@ -46,8 +46,6 @@ const RichTextEditor: React.FC<Props> = ({ onChange, value }) => {
         theme="snow"
         value={editorHtml}
         onChange={handleChange}
-        modules={modules}
-        formats={formats}
       />
     </div>
   );

@@ -1,7 +1,5 @@
-import Search from '@/components/Search';
 import Error from '@/components/Error';
 import { IBlog } from '@/schema/blogSchema';
-import Hero from '@/sections/Hero';
 import Navbar from '@/sections/Navbar';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -32,7 +30,7 @@ const Index = () => {
         setGotError(true);
       });
   }, [pid]);
-  
+
   return (
     <>
       <Head>

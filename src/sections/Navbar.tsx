@@ -10,7 +10,6 @@ const Navbar = () => {
         { name: 'Recent Blogs', link: '/#recentblogs' },
         { name: 'About', link: '/about' },
         { name: 'Blog', link: '/blog/' },
-        { name: 'Contact', link: '/contact' },
     ];
 
 

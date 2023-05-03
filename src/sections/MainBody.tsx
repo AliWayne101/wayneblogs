@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
-import Button from '@/components/Button'
 import BlogEntry from '@/components/BlogEntry'
 import axios from 'axios'
 import { IBlog } from '@/schema/blogSchema'
@@ -24,7 +23,6 @@ const MainBody = ({ infiniteData, primedDocs }: Props) => {
     const target = infiniteData ? "all" : "some";
 
     useEffect(() => {
-
         if (primedDocs === null) {
             const reqAddr = `/api/queries?action=showBlogs&target=${target}`;
             axios.get(reqAddr)
@@ -40,14 +38,17 @@ const MainBody = ({ infiniteData, primedDocs }: Props) => {
             setGotResult(true);
             setdocs(primedDocs);
         }
+    }, [target, primedDocs]);
+
+    useEffect(() => {
 
         axios.get('/api/queries?action=getcategories&target=null')
             .then((res) => {
                 setCategoryButtons(res.data.plaindata);
             })
             .catch(err => console.log);
+    }, [])
 
-    }, [target]);
 
     return (
         <div className="body-container" id="recentblogs">

@@ -8,7 +8,7 @@ const BlogEntry = ({ bEntry }: { bEntry: IBlog }) => {
     return (
         <div className="blog">
             <div className="blog-text">
-                <div className="blog-text-uploaded"><span>{bEntry.author}</span> in <span>{bEntry.category}</span></div>
+                <div className="blog-text-uploaded"><span>{bEntry.author}</span> in <span><Link href={`/category/${bEntry.category}`} className='link'>{bEntry.category}</Link></span></div>
                 <div className="blog-text-title">
                     <Link href={`/blog/${bEntry.titleurl}`} className='link'>{bEntry.title}</Link>
                 </div>
