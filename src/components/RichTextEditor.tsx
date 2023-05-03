@@ -19,11 +19,13 @@ const RichTextEditor: React.FC<Props> = ({ onChange, value }) => {
   };
 
   return (
-    <ReactQuill
-      theme="snow"
-      value={editorHtml}
-      onChange={handleChange}
-    />
+    <div className="rich-text-container">
+      <ReactQuill
+        theme="snow"
+        value={editorHtml}
+        onChange={handleChange}
+      />
+    </div>
   );
 };
 

@@ -7,13 +7,15 @@ import Head from 'next/head'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import RichTextEditor from '@/components/RichTextEditor'
+import Loading from '@/components/Loading'
 
 const Write = () => {
     const [Verified, setVerified] = useState(false);
     const [photo, setPhoto] = useState<File | null>();
-    const [isUploaded, setIsUploaded] = useState(true);
+    const [isUploaded, setIsUploaded] = useState(false);
     const [photoLink, setPhotoLink] = useState('');
 
+    const [postUploading, setPostUploading] = useState(false);
 
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');
@@ -24,7 +26,6 @@ const Write = () => {
     const [editorContent, setEditorContent] = useState<string>('');
 
     const handleEditorChange = (value: string) => {
-        console.log(value);
         setEditorContent(value);
     };
 
@@ -38,10 +39,12 @@ const Write = () => {
     const uploadPost = async () => {
         if (isUploaded) {
             try {
+                setPostUploading(true);
                 const response = await axios.post('/api/createpost', {
                     author,
                     title,
                     desc,
+                    editorContent,
                     tags,
                     category,
                     photoLink
@@ -91,35 +94,39 @@ const Write = () => {
             <main>
                 {
                     Verified ? (
-                        <>
-                            <div className="admin">
-                                <h1>Add new post</h1>
-                                <div className="admin-input">
-                                    <input type="text" name="author" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                        postUploading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <div className="admin">
+                                    <h1>Add new post</h1>
+                                    <div className="admin-input">
+                                        <input type="text" name="author" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder='Uploaded by'/>
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
+                                    </div>
+                                    <div className="admin-input">
+                                        <textarea name="desc" id="desc" cols={30} rows={10} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder='Short Description' />
+                                    </div>
+                                    <div className="admin-body">
+                                        <RichTextEditor value={editorContent} onChange={handleEditorChange} />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="tags" id="tags" value={tags} onChange={(e) => setTags(e.target.value)} placeholder='Tags (comma separated, no-space)' />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Category'/>
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="file" name="photo-input" id="input-photo" onChange={photoUploaded} />
+                                    </div>
+                                    <span onClick={uploadPost}>
+                                        <Button text='Add Post' link='' />
+                                    </span>
                                 </div>
-                                <div className="admin-input">
-                                    <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                                </div>
-                                <div className="admin-input">
-                                    <textarea name="desc" id="desc" cols={30} rows={10} value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
-                                </div>
-                                <div className="admin-body">
-                                    <RichTextEditor value={editorContent} onChange={handleEditorChange} />
-                                </div>
-                                <div className="admin-input">
-                                    <input type="text" name="tags" id="tags" value={tags} onChange={(e) => setTags(e.target.value)} />
-                                </div>
-                                <div className="admin-input">
-                                    <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
-                                </div>
-                                <div className="admin-input">
-                                    <input type="file" name="photo-input" id="input-photo" onChange={photoUploaded} />
-                                </div>
-                                <span onClick={uploadPost}>
-                                    <Button text='Add Post' link='' />
-                                </span>
-                            </div>
-                        </>
+                            </>
+                        )
                     ) : (
                         <Login />
                     )

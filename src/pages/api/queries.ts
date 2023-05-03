@@ -139,8 +139,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               res.status(500).json(results);
             });
         } else if (action === "search") {
-          
-
           const decodedTarget = typeof target === 'string' ? decodeURIComponent(target) : '';
           let finalResult: IBlog[] = [];
           BlogSchema.find({

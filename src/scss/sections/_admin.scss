@@ -1,0 +1,31 @@
+.admin {
+  h1 {
+    color: var(--light-slate);
+    font-family: var(--raleway);
+  }
+
+  &-input {
+    margin: 10px;
+    width: 100%;
+    font-family: var(--fira-code);
+    color: var(--light-slate);
+    input,
+    textarea {
+      width: 100%;
+      outline: none;
+      border: 2px solid var(--secondary-color);
+      background-color: transparent;
+      padding: 5px;
+      color: inherit;
+      font-family: inherit;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+  }
+
+  &-body {
+    height: auto;
+  }
+}

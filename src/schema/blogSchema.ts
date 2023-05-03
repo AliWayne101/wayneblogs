@@ -31,8 +31,14 @@ const blogSchema = new mongoose.Schema({
     },
     category: String,
     img: String,
-    likes: Number,
-    dislikes: Number
+    likes: {
+      type: Number,
+      default: 0
+    },
+    dislikes:  {
+      type: Number,
+      default: 0
+    },
 });
 
 let BlogModel: mongoose.Model<IBlog>;
