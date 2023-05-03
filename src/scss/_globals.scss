@@ -45,3 +45,16 @@ body {
 .rich-text-container {
   color: var(--light-slate);
 }
+
+.page-body {
+  margin-top: 10rem;
+  color: var(--light-slate);
+  font-family: var(--fira-code);
+  h2 {
+    margin-bottom: 20px;
+    color: var(--slate);
+  }
+  p {
+    margin: 10px;
+  }
+}

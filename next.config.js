@@ -8,4 +8,12 @@ module.exports = {
   images: {
     domains: ['i.ibb.co'],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap'
+      },
+    ]
+  },
 }

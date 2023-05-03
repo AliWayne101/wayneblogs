@@ -18,12 +18,36 @@ const RichTextEditor: React.FC<Props> = ({ onChange, value }) => {
     onChange(html);
   };
 
+
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline'],
+      ['link', 'image'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      ['clean']
+    ],
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    },
+  }
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet',
+    'link', 'image',
+  ];
+
   return (
     <div className="rich-text-container">
       <ReactQuill
         theme="snow"
         value={editorHtml}
         onChange={handleChange}
+        modules={modules}
+        formats={formats}
       />
     </div>
   );
