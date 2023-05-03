@@ -128,7 +128,7 @@ const Write = () => {
                             </>
                         )
                     ) : (
-                        <Login />
+                        <Login onChange={setVerified} value={Verified} />
                     )
                 }
 
