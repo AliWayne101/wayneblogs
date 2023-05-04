@@ -2,6 +2,7 @@ import Hero from '@/sections/Hero'
 import MainBody from '@/sections/MainBody'
 import Navbar from '@/sections/Navbar'
 import Head from 'next/head'
+import Script from 'next/script'
 import React from 'react'
 
 function Index() {
@@ -14,6 +15,17 @@ function Index() {
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
         <meta name="google-site-verification" content="b7D9w3jLmQYeXyUi9jsyf7NsdHZiOGZkCQpfQ3HBb5o" />
       </Head>
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+          ga('create', 'G-K07CDB1PBD', 'auto');
+          ga('send', 'pageview');
+        `}
+      </Script>
+      <Script
+        src="https://www.google-analytics.com/analytics.js"
+        strategy="afterInteractive" />
       <Navbar />
       <main>
         <Hero />
