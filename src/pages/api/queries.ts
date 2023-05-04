@@ -18,10 +18,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (req.query.target !== undefined) {
         const target = req.query.target;
         if (action === "relatedtopics") {
-          //const searchTags = req.query.target?.split('#') ?? [];
-          let searchTags: string[];
+          let searchTags: string[] =  [];
           if (typeof req.query.target === "string") {
-            searchTags = req.query.target.split("#");
+            const decodedTarget = decodeURIComponent(req.query.target);
+            decodedTarget.split('#').map((data) => {
+              searchTags.push(data);
+            });
           } else {
             searchTags = req.query.target;
           }
@@ -29,7 +31,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           BlogSchema.find({
             tags: { $in: searchTags },
           })
-            .limit(5)
             .exec()
             .then((docs: IBlog[]) => {
               results = {
@@ -139,7 +140,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               res.status(500).json(results);
             });
         } else if (action === "search") {
-          const decodedTarget = typeof target === 'string' ? decodeURIComponent(target) : '';
+          const decodedTarget =
+            typeof target === "string" ? decodeURIComponent(target) : "";
           let finalResult: IBlog[] = [];
           BlogSchema.find({
             $or: [
@@ -149,40 +151,46 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               { category: { $regex: decodedTarget, $options: "i" } },
             ],
           })
-          .sort({ tstamp: -1 })
-          .exec()
-          .then((docs) => {
-            docs.map((data) => {
-              const found = finalResult.some(obj => obj._id === data._id);
-              if (found === false || found === undefined) {
-                finalResult.push(data);
-              }
-            });
-            
-            results = {
-              data: finalResult,
-            };
-            res.status(200).json(results);
-          })
-          .catch((err) => {
-            results = {
-              error: err,
-            };
+            .sort({ tstamp: -1 })
+            .exec()
+            .then((docs) => {
+              docs.map((data) => {
+                const found = finalResult.some((obj) => obj._id === data._id);
+                if (found === false || found === undefined) {
+                  finalResult.push(data);
+                }
+              });
 
-            res.status(500).json(results);
-          })
+              results = {
+                data: finalResult,
+              };
+              res.status(200).json(results);
+            })
+            .catch((err) => {
+              results = {
+                error: err,
+              };
+
+              res.status(500).json(results);
+            });
         } else if (action === "like") {
-          const update = await BlogSchema.findOneAndUpdate({
-            _id: target
-          }, {
-            $inc: { likes: 1}
-          });
+          const update = await BlogSchema.findOneAndUpdate(
+            {
+              _id: target,
+            },
+            {
+              $inc: { likes: 1 },
+            }
+          );
         } else if (action === "dislike") {
-          const update = await BlogSchema.findOneAndUpdate({
-            _id: target
-          }, {
-            $inc: { likes: 1}
-          });
+          const update = await BlogSchema.findOneAndUpdate(
+            {
+              _id: target,
+            },
+            {
+              $inc: { likes: 1 },
+            }
+          );
         }
         // end of statement
       }

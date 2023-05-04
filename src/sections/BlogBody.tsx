@@ -28,7 +28,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
 
     const dislikePost = () => {
         setDislikes(dislikes + 1);
-        updatePost('like');
+        updatePost('dislike');
     }
 
     const updatePost = (action: string) => {
@@ -129,7 +129,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
             </div>
             {
                 primedTags !== '' ? (
-                    <RelatedSection tags={primedTags} />
+                    <RelatedSection tags={primedTags} targetURL={blogInfo.titleurl} />
                 ) : (
                     <Loading />
                 )

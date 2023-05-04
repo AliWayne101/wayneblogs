@@ -5,15 +5,16 @@ import BlogEntry from '@/components/BlogEntry';
 import RightBox from '@/components/RightBox';
 
 interface Props {
-    tags: string
+    tags: string,
+    targetURL: string
 }
 
-const RelatedSection = ({ tags }: Props) => {
-
+const RelatedSection = ({ tags, targetURL }: Props) => {
     const [relatedBlogs, SetrelatedBlogs] = useState<IBlog[]>([]);
     const [categoryButtons, setCategoryButtons] = useState([]);
     useEffect(() => {
-        const relatedLink = `/api/queries?action=relatedtopics&target=${tags}`;
+
+        const relatedLink = `/api/queries?action=relatedtopics&target=${encodeURIComponent(tags)}`;
         axios.get(relatedLink)
             .then((res) => {
                 SetrelatedBlogs(res.data.data);
@@ -35,7 +36,9 @@ const RelatedSection = ({ tags }: Props) => {
                     {
                         relatedBlogs && (
                             relatedBlogs.map((data, index) => (
-                                <BlogEntry bEntry={data} key={index} />
+                                data.titleurl !== targetURL && (
+                                    <BlogEntry bEntry={data} key={index} />
+                                )
                             ))
                         )
                     }
