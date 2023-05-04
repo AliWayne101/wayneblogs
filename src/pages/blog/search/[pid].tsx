@@ -13,7 +13,7 @@ const Index = () => {
   const _router = useRouter();
   const { pid } = _router.query;
 
-  
+
   const [GotResult, setGotResult] = useState(false);
   const [Docs, setDocs] = useState<IBlog[]>([]);
   const [GotError, setGotError] = useState(false);
@@ -35,6 +35,9 @@ const Index = () => {
     <>
       <Head>
         <title>Searched {pid} - Wayne Blogs</title>
+        <meta name="description" content='Discover a world of ideas, insights, and inspiration with our diverse range of expertly crafted content. From the latest trends to timeless classics, our blog has something for everyone. Join the conversation today and let us guide you on your journey of knowledge and discovery.' />
+        <meta name="author" content='Ali Wains' />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
       <Navbar />
       <main>

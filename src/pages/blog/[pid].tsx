@@ -34,6 +34,10 @@ const Blog = () => {
     <>
       <Head>
         <title>{currentDoc ? (currentDoc.title) : 'Blog'} - Wayne Blogs</title>
+        <meta name="description" content={currentDoc?.desc} />
+        <meta name="author" content={currentDoc?.author} />
+        <link rel="canonical" href={`https://wayneblog.vercel.app/blog/${currentDoc?.titleurl}`} />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
       <Navbar />
       <main>

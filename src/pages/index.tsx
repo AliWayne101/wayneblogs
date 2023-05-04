@@ -9,11 +9,14 @@ function Index() {
     <>
       <Head>
         <title>WayneBlogs</title>
+        <meta name="description" content='Discover a world of ideas, insights, and inspiration with our diverse range of expertly crafted content. From the latest trends to timeless classics, our blog has something for everyone. Join the conversation today and let us guide you on your journey of knowledge and discovery.' />
+        <meta name="author" content='Ali Wains' />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
       <Navbar />
       <main>
         <Hero />
-          <MainBody infiniteData={false} primedDocs={null}/>
+        <MainBody infiniteData={false} primedDocs={null} />
       </main>
     </>
   )
