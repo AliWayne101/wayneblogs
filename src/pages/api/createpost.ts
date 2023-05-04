@@ -10,6 +10,11 @@ type PostData = {
   tags: string;
   category: string;
   photoLink: string;
+  firstText: string;
+  firstDesc: string;
+  TOC: string;
+  inpageImage: string;
+  FAQ: string;
 };
 
 export default async function handler(
@@ -33,7 +38,14 @@ export default async function handler(
       title: postData.title,
       titleurl: titleURL,
       desc: postData.desc,
-      body: postData.editorContent,
+      body: {
+        text: postData.editorContent,
+        firstHeadingTitle: postData.firstText,
+        firstHeadingDesc: postData.firstDesc,
+        tableOfContents: postData.TOC,
+        inPageImage: postData.inpageImage,
+        FAQ: postData.FAQ
+      },
       category: postData.category,
       tags: postData.tags.split(","),
       img: postData.photoLink,
@@ -49,6 +61,7 @@ export default async function handler(
               .json({
                 posted: true,
                 titleurl: titleURL,
+                inputData: postData
               });
           })
           .catch((err) => {

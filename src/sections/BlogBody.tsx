@@ -12,6 +12,7 @@ import { IBlog } from '@/schema/blogSchema';
 import RelatedSection from './RelatedSection';
 import Loading from '@/components/Loading';
 import { GrLike, GrDislike } from 'react-icons/gr';
+import Image from 'next/image';
 
 const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
 
@@ -24,7 +25,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
         setLikes(likes + 1);
         updatePost('like');
     }
-    
+
     const dislikePost = () => {
         setDislikes(dislikes + 1);
         updatePost('like');
@@ -87,7 +88,44 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
             </div>
             <div className="detailed-blog-body">
                 <div className="detailed-blog-body-title">{blogInfo.title}</div>
-                <div className="detailed-blog-body-inner" dangerouslySetInnerHTML={{ __html: blogInfo.body }}></div>
+
+                <div className="detailed-blog-body-inner">
+                    <h1>{blogInfo.body.firstHeadingTitle}</h1>
+                    <p>{blogInfo.body.firstHeadingDesc}</p>
+                    <div className="detailed-blog-body-toc">
+                        <div className="detailed-blog-body-toc-left">
+                            <h2>Table of Contents</h2>
+                            <ul>
+                                {blogInfo.body.tableOfContents.split('#').map((data, index) => (
+                                    <li key={index}>{data}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="detailed-blog-body-toc-right">
+                            <Image alt={blogInfo.title} height={430} width={600} src={blogInfo.body.inPageImage} />
+                        </div>
+                    </div>
+
+                    <div className="detailed-blog-body-inner-text" dangerouslySetInnerHTML={{ __html: blogInfo.body.text }}></div>
+
+                    <div className="detailed-blog-body-inner-faq">
+                        <h1>F.A.Q</h1>
+                        <ol>
+                            {
+                                blogInfo.body.FAQ.split('#').map((data, index) => (
+                                    <>
+                                        <li key={index}>{data.split(';')[0]}</li>
+                                        <ul>
+                                            <li>{data.split(';')[1]}</li>
+                                        </ul>
+                                    </>
+                                ))
+                            }
+                        </ol>
+                    </div>
+
+                </div>
+
             </div>
             {
                 primedTags !== '' ? (

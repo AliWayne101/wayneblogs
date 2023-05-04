@@ -23,6 +23,12 @@ const Write = () => {
     const [tags, setTags] = useState('');
     const [category, setCategory] = useState('');
 
+    const [firstText, setFirstText] = useState('');
+    const [firstDesc, setFirstDesc] = useState('');
+    const [TOC, setTOC] = useState('');
+    const [inpageImage, setInpageImage] = useState('');
+    const [FAQ, setFAQ] = useState('');
+
     const [editorContent, setEditorContent] = useState<string>('');
     
     const _router = useRouter();
@@ -49,7 +55,12 @@ const Write = () => {
                     editorContent,
                     tags,
                     category,
-                    photoLink
+                    photoLink,
+                    firstText,
+                    firstDesc,
+                    TOC,
+                    inpageImage,
+                    FAQ
                 });
 
                 if (response.data.posted === true) {
@@ -110,8 +121,23 @@ const Write = () => {
                                     <div className="admin-input">
                                         <textarea name="desc" id="desc" cols={30} rows={10} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder='Short Description' />
                                     </div>
+                                    <div className="admin-input">
+                                        <input name="firsttext" id="firsttext" value={firstText} onChange={(e) => setFirstText(e.target.value)} placeholder='Entry Heading Text' />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input name="firstdesc" id="firstdesc" value={firstDesc} onChange={(e) => setFirstDesc(e.target.value)} placeholder='Entry Heading Description' />
+                                    </div>
                                     <div className="admin-body">
                                         <RichTextEditor value={editorContent} onChange={handleEditorChange} />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="toc" id="toc" value={TOC} onChange={(e) => setTOC(e.target.value)} placeholder='Table of Contents (# separated)' />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="ipimage" id="ipimage" value={inpageImage} onChange={(e) => setInpageImage(e.target.value)} placeholder='Inpage Image Link' />
+                                    </div>
+                                    <div className="admin-input">
+                                        <input type="text" name="FAQ" id="FAQ" value={FAQ} onChange={(e) => setFAQ(e.target.value)} placeholder='FAQ format -> Question;Answer#' />
                                     </div>
                                     <div className="admin-input">
                                         <input type="text" name="tags" id="tags" value={tags} onChange={(e) => setTags(e.target.value)} placeholder='Tags (comma separated, no-space)' />
