@@ -24,6 +24,8 @@ const Write = () => {
     const [category, setCategory] = useState('');
 
     const [editorContent, setEditorContent] = useState<string>('');
+    
+    const _router = useRouter();
 
     const handleEditorChange = (value: string) => {
         setEditorContent(value);
@@ -51,7 +53,6 @@ const Write = () => {
                 });
 
                 if (response.data.posted === true) {
-                    const _router = useRouter();
                     _router.push(`/blog/${response.data.titleurl}`);
                 }
             } catch (err) {
