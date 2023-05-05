@@ -87,8 +87,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
                 </div>
             </div>
             <div className="detailed-blog-body">
-                <div className="detailed-blog-body-title">{blogInfo.title}</div>
-
+                <div className="detailed-blog-body-title">Author: <span>{blogInfo.title}</span></div>
                 <div className="detailed-blog-body-inner">
                     <h1>{blogInfo.body.firstHeadingTitle}</h1>
                     <p>{blogInfo.body.firstHeadingDesc}</p>

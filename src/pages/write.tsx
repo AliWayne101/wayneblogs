@@ -8,6 +8,8 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import RichTextEditor from '@/components/RichTextEditor'
 import Loading from '@/components/Loading'
+import Error from '@/components/Error'
+import { Details } from '@/configs'
 
 const Write = () => {
     const [Verified, setVerified] = useState(false);
@@ -16,6 +18,8 @@ const Write = () => {
     const [photoLink, setPhotoLink] = useState('');
 
     const [postUploading, setPostUploading] = useState(false);
+    const [bing, setBing] = useState(true);
+    const [titleURL, setTitleURL] = useState('');
 
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');
@@ -30,7 +34,7 @@ const Write = () => {
     const [FAQ, setFAQ] = useState('');
 
     const [editorContent, setEditorContent] = useState<string>('');
-    
+
     const _router = useRouter();
 
     const handleEditorChange = (value: string) => {
@@ -64,7 +68,28 @@ const Write = () => {
                 });
 
                 if (response.data.posted === true) {
-                    _router.push(`/blog/${response.data.titleurl}`);
+                    setTitleURL(response.data.titleurl);
+                    const submitData = {
+                        siteUrl: Details.siteUrl,
+                        url: `${Details.siteUrl}/blog/${response.data.titleurl}`
+                    }
+                    const submitHeaders = {
+                        headers: {
+                            'Content-Type': 'application/json; charset=utf-8'
+                        }
+                    }
+                    axios.post(`https://ssl.bing.com/webmaster/api.svc/json/SubmitUrl?apikey=${process.env.NEXT_PUBLIC_BING_API!}`,
+                        submitData,
+                        submitHeaders
+                    ).then((_response) => {
+                        if (_response.data.d === null) {
+                            _router.push(`/blog/${response.data.titleurl}`);
+                        } else
+                            setBing(false);
+                    }).catch((err) => {
+                        console.log(err);
+                        setBing(false);
+                    });
                 }
             } catch (err) {
                 console.log(err);
@@ -107,16 +132,23 @@ const Write = () => {
                 {
                     Verified ? (
                         postUploading ? (
-                            <Loading />
+                            bing ? (
+                                <Loading />
+                            ) : (
+                                <>
+                                    <Error text={'Unable to add the page to bing search console, kindly submit it manually'} />
+                                    <Button text={'Page link'} link={`/blog/${titleURL}`} />
+                                </>
+                            )
                         ) : (
                             <>
                                 <div className="admin">
                                     <h1>Add new post</h1>
                                     <div className="admin-input">
-                                        <input type="text" name="author" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder='Uploaded by'/>
+                                        <input type="text" name="author" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder='Uploaded by' />
                                     </div>
                                     <div className="admin-input">
-                                        <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
+                                        <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
                                     </div>
                                     <div className="admin-input">
                                         <textarea name="desc" id="desc" cols={30} rows={10} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder='Short Description' />
@@ -143,7 +175,7 @@ const Write = () => {
                                         <input type="text" name="tags" id="tags" value={tags} onChange={(e) => setTags(e.target.value)} placeholder='Tags (comma separated, no-space)' />
                                     </div>
                                     <div className="admin-input">
-                                        <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Category'/>
+                                        <input type="text" name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Category' />
                                     </div>
                                     <div className="admin-input">
                                         <input type="file" name="photo-input" id="input-photo" onChange={photoUploaded} />

@@ -33,6 +33,10 @@
       font-size: var(--txlarge);
       color: var(--theme-color);
       margin-bottom: 20px;
+
+      span {
+        color: var(--light-slate);
+      }
     }
     &-inner {
       h1,

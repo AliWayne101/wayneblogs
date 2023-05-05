@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Navbar from '@/sections/Navbar';
-import Search from '@/components/Search';
 import BlogBody from '@/sections/BlogBody';
 import Footer from '@/sections/Footer';
 import axios from 'axios';
