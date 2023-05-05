@@ -57,7 +57,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
         <div className="detailed-blog">
             <div className="detailed-blog-userbox">
                 <div className="detailed-blog-userbox-left">
-                    <span className='detailed-blog-userbox-left-author'>{blogInfo.author}</span>
+                    <span className='detailed-blog-userbox-left-author'>Author: <span>{blogInfo.author}</span></span>
                     <span className='detailed-blog-userbox-left-tstamp'>{new Date(blogInfo.tstamp).toString()}</span>
                     <span className='detailed-blog-userbox-left-buttons'>
                         {likes} <span className='clickable'><GrLike size={12} onClick={likePost} /></span> {dislikes} <span className='clickable'><GrDislike size={12} onClick={dislikePost} /></span>
@@ -87,7 +87,7 @@ const BlogBody = ({ blogInfo }: { blogInfo: IBlog }) => {
                 </div>
             </div>
             <div className="detailed-blog-body">
-                <div className="detailed-blog-body-title">Author: <span>{blogInfo.title}</span></div>
+                <div className="detailed-blog-body-title">{blogInfo.title}</div>
                 <div className="detailed-blog-body-inner">
                     <h1>{blogInfo.body.firstHeadingTitle}</h1>
                     <p>{blogInfo.body.firstHeadingDesc}</p>
