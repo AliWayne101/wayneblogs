@@ -9,14 +9,7 @@ import { IBlog } from '@/schema/blogSchema';
 import Error from '@/components/Error';
 import Loading from '@/components/Loading';
 
-interface IBlogBody {
-  Title: string,
-  TitleURL: string,
-  Author: string,
-  ShortDescription: string
-}
-
-const Blog: React.FC<IBlogBody> = ({ Title, TitleURL, Author, ShortDescription }) => {
+const Blog = () => {
   const _router = useRouter();
   const { pid } = _router.query;
   const [currentDoc, setCurrentDoc] = useState<IBlog | undefined>();
@@ -35,16 +28,14 @@ const Blog: React.FC<IBlogBody> = ({ Title, TitleURL, Author, ShortDescription }
     }
   }, [pid])
 
-
   return (
     <>
       {
         currentDoc && (
           <Head>
             <title>{currentDoc.title} - Wayne Blogs</title>
-            <meta name="description" content='Discover a world of ideas, insights, and inspiration with our diverse range of expertly crafted content. From the latest trends to timeless classics, our blog has something for everyone. Join the conversation today and let us guide you on your journey of knowledge and discovery.' />
-            <meta name="author" content="Ali Wains" />
-            <link rel="canonical" href={`https://wayneblog.vercel.app/blog/${currentDoc.titleurl}`} />
+            <meta name="description" content={currentDoc.desc} />
+            <meta name="author" content={currentDoc.author} />
             <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
           </Head>
         )
