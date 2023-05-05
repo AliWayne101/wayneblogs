@@ -41,7 +41,7 @@ const Blog: React.FC<IBlogBody> = ({ Title, TitleURL, Author, ShortDescription }
       {
         currentDoc && (
           <Head>
-            <title>{Title} - Wayne Blogs</title>
+            <title>{currentDoc.title} - Wayne Blogs</title>
             <meta name="description" content='Discover a world of ideas, insights, and inspiration with our diverse range of expertly crafted content. From the latest trends to timeless classics, our blog has something for everyone. Join the conversation today and let us guide you on your journey of knowledge and discovery.' />
             <meta name="author" content="Ali Wains" />
             <link rel="canonical" href={`https://wayneblog.vercel.app/blog/${currentDoc.titleurl}`} />
@@ -49,7 +49,7 @@ const Blog: React.FC<IBlogBody> = ({ Title, TitleURL, Author, ShortDescription }
           </Head>
         )
       }
-      
+
       <Navbar />
       <main>
         {
