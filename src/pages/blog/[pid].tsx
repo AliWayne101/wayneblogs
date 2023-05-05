@@ -32,31 +32,33 @@ const Blog = () => {
     <>
       {
         currentDoc && (
-          <Head>
-            <title>{currentDoc.title} - Wayne Blogs</title>
-            <meta name="description" content={currentDoc.desc} />
-            <meta name="author" content={currentDoc.author} />
-            <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-          </Head>
+          <>
+            <Head>
+              <title>{currentDoc.title} - Wayne Blogs</title>
+              <meta name="description" content={currentDoc.desc} />
+              <meta name="author" content={currentDoc.author} />
+              <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+            </Head>
+
+            <Navbar />
+            <main>
+              {
+                isError ? (
+                  <Error text="There was a problem fetching the document, please refresh the page" />
+                ) : (
+                  currentDoc ? (
+                    <BlogBody blogInfo={currentDoc} />
+                  ) : (
+                    <Loading />
+                  )
+                )
+              }
+
+              <Footer />
+            </main>
+          </>
         )
       }
-
-      <Navbar />
-      <main>
-        {
-          isError ? (
-            <Error text="There was a problem fetching the document, please refresh the page" />
-          ) : (
-            currentDoc ? (
-              <BlogBody blogInfo={currentDoc} />
-            ) : (
-              <Loading />
-            )
-          )
-        }
-
-        <Footer />
-      </main>
     </>
   )
 }
