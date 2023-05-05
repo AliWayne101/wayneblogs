@@ -6,6 +6,7 @@ import NProgress from 'nprogress';
 import "nprogress/nprogress";
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 const raleway = Raleway({ subsets: ["latin"] });
 const firaCode = Fira_Code({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
@@ -26,8 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <>
-
+    <Suspense>
       <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!}`} />
       <Script id="google-analytics" strategy="lazyOnload">
         {`
@@ -47,6 +47,6 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
       <Component {...pageProps} />
       <Analytics />
-    </>
+    </ Suspense>
   )
 }
