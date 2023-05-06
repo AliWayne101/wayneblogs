@@ -1,67 +1,75 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Navbar from '@/sections/Navbar';
-import BlogBody from '@/sections/BlogBody';
-import Footer from '@/sections/Footer';
-import axios from 'axios';
-import { IBlog } from '@/schema/blogSchema';
-import Error from '@/components/Error';
-import Loading from '@/components/Loading';
+import Loading from '@/components/Loading'
+import { Details } from '@/configs'
+import { IBlog } from '@/schema/blogSchema'
+import BlogBody from '@/sections/BlogBody'
+import Footer from '@/sections/Footer'
+import Navbar from '@/sections/Navbar'
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import React from 'react'
 
-const Blog = () => {
-  const _router = useRouter();
-  const { pid } = _router.query;
-  const [currentDoc, setCurrentDoc] = useState<IBlog | undefined>();
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    if (pid !== undefined) {
-      const apiAddr = `/api/queries?action=searchexact&target=${pid}`;
-      axios.get(apiAddr)
-        .then((res) => {
-          setCurrentDoc(res.data.data[0]);
-        })
-        .catch((err) => {
-          setIsError(true);
-        })
-    }
-  }, [pid])
-
-  return (
-    <>
-      {
-        currentDoc && (
-          <>
-            <Head>
-              <title>{currentDoc.title} - Wayne Blogs</title>
-              <meta name="description" content={currentDoc.desc} />
-              <meta name="author" content={currentDoc.author} />
-              <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-            </Head>
-
-            <Navbar />
-            <main>
-              {
-                isError ? (
-                  <Error text="There was a problem fetching the document, please refresh the page" />
-                ) : (
-                  currentDoc ? (
-                    <BlogBody blogInfo={currentDoc} />
-                  ) : (
-                    <Loading />
-                  )
-                )
-              }
-
-              <Footer />
-            </main>
-          </>
-        )
-      }
-    </>
-  )
+interface BlogProps {
+    currentDoc: IBlog | null
 }
 
+const Blog = ({ currentDoc }: BlogProps) => {
+    return (
+        <>
+
+            <Head>
+                <title>{currentDoc !== null ? currentDoc.title : "404"} - {Details.webName}</title>
+                <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+                {
+                    currentDoc !== null && (
+                        <>
+                            <meta name="description" content={currentDoc.desc} />
+                            <meta name='author' content={currentDoc.author} />
+                            <link rel='canonical' href={`${Details.siteUrl}/blog/${currentDoc.titleurl}`} />
+                        </>
+                    )
+                }
+
+            </Head>
+            <Navbar />
+            <main>
+                {
+                    currentDoc ? (
+                        <BlogBody blogInfo={currentDoc} />
+                    ) : (
+                        <Loading />
+                    )
+                }
+                <Footer />
+            </main>
+        </>
+    )
+}
+
+export const getServerSideProps: GetServerSideProps<BlogProps> = async (context) => {
+    const API_URL = new URL(`/api/queries?action=searchexact&target=${context.query.pid}`, Details.siteUrl).toString();
+    const res = await fetch(API_URL);
+
+    //checking
+    if (!res) {
+        return {
+            notFound: true
+        }
+    }
+    const data = await res.json();
+    const currentDoc = data.data[0];
+
+    //If null|undefined return 404
+    if (!currentDoc) {
+        return {
+            notFound: true
+        }
+    }
+
+    return {
+        props: {
+            currentDoc
+        }
+    }
+}
 
 export default Blog

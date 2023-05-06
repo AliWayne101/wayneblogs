@@ -6,7 +6,7 @@ import { connect } from "mongoose";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   let results: {
     error?: Error;
-    data?: IBlog[] | string;
+    data?: IBlog[] | string | null;
     length?: number;
     plaindata?: string[];
   } = {};
@@ -93,10 +93,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             })
             .catch((err: Error) => {
               results = {
+                data: null,
                 error: err,
               };
 
-              res.status(500).json(results);
+              console.log(err);
+
+              res.status(200).json(results);
             });
         } else if (action === "getcategories") {
           BlogSchema.find()
