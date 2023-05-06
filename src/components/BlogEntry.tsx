@@ -17,7 +17,7 @@ const BlogEntry = ({ bEntry }: { bEntry: IBlog }) => {
                     <Button text="Read more.." link={`/blog/${bEntry.titleurl}`} />
                 </div>
                 <div className="blog-text-info">
-                    <span>{new Date(bEntry.tstamp.toString()).toDateString()}</span>
+                    <span className='_tstamp'>{new Date(bEntry.tstamp.toString()).toDateString()}</span>
                     {
                         bEntry.tags.map((data, index) => (
                             <span key={index}>{data}</span>

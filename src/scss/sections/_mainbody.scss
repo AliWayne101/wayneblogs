@@ -49,8 +49,13 @@
         &-info {
           padding: 5px 30px;
           font-family: var(--fira-code);
+          font-size: var(--tsm);
+          span._tstamp {
+            font-size: 9px;
+          }
           span {
             margin-right: 40px;
+            font-size: 10px;
           }
         }
       }
