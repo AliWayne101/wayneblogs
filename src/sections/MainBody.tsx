@@ -72,7 +72,7 @@ const MainBody = ({ infiniteData, primedDocs }: Props) => {
                 }
             </div>
             <div className="body-container-right">
-                <Search />
+                <Search extraClass='smaller' />
                 {categoryButtons.length > 0 && (
                     <RightBox title='Discover More' buttons={categoryButtons} />
                 )}

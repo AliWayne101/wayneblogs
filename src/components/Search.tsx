@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 
-const Search = () => {
+const Search = ({extraClass}: {extraClass: string}) => {
     const [searchValue, setSearchValue] = useState('');
     
     const router = useRouter();
@@ -20,7 +20,7 @@ const Search = () => {
     }
 
   return (
-    <div className="search">
+    <div className={`search ${extraClass}`}>
         <div className="search-box">
             <input type="text" name="search" id="search" placeholder='Search any topic..' onKeyDown={(e) => _keyDown(e.key)} onChange={(e) => setSearchValue(e.currentTarget.value)} />
         </div>

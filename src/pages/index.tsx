@@ -1,3 +1,4 @@
+import Search from '@/components/Search'
 import Hero from '@/sections/Hero'
 import MainBody from '@/sections/MainBody'
 import Navbar from '@/sections/Navbar'
@@ -18,6 +19,7 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
+        <Search extraClass='larger' />
         <MainBody infiniteData={false} primedDocs={null} />
       </main>
     </>
