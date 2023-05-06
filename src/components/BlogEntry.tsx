@@ -18,11 +18,13 @@ const BlogEntry = ({ bEntry }: { bEntry: IBlog }) => {
                 </div>
                 <div className="blog-text-info">
                     <span className='_tstamp'>{new Date(bEntry.tstamp.toString()).toDateString()}</span>
+                    <span className='tags'>
                     {
                         bEntry.tags.map((data, index) => (
-                            <span key={index}>{data}</span>
+                            index > 0 ? (`, ${data}`) : (data)
                         ))
                     }
+                    </span>
                 </div>
             </div>
             <div className="blog-image">
