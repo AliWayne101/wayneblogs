@@ -24,6 +24,7 @@ const Blog = ({ currentDoc }: BlogProps) => {
                         <>
                             <meta name="description" content={currentDoc.desc} />
                             <meta name='author' content={currentDoc.author} />
+                            <meta property='article:published_time' content={new Date(currentDoc.tstamp).toISOString()} />
                             <link rel='canonical' href={`${Details.siteUrl}/blog/${currentDoc.titleurl}`} />
                         </>
                     )
